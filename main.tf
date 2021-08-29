@@ -18,6 +18,12 @@ resource "aws_s3_bucket" "static_content_bucket" {
   }
 }
 
+resource "aws_s3_bucket" "reports" {
+  bucket        = "${var.environment}-product2-reports"
+  acl           = "private"
+  force_destroy = true
+}
+
 resource "kubernetes_config_map" "s3_bucket_names" {
   metadata {
     name      = "product2-s3-bucket-names"
@@ -26,6 +32,7 @@ resource "kubernetes_config_map" "s3_bucket_names" {
 
   data = {
     web_bucket            = aws_s3_bucket.web_bucket.id
+    reports               = aws_s3_bucket.reports.id
     static_content_bucket = aws_s3_bucket.static_content_bucket.id
   }
 }
