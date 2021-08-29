@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "web_bucket" {
-  bucket        = "${var.environment}-web-bucket"
+  bucket        = "${var.environment}-product2-web-bucket"
   acl           = "public-read"
   force_destroy = true
   website {
@@ -9,7 +9,7 @@ resource "aws_s3_bucket" "web_bucket" {
 }
 
 resource "aws_s3_bucket" "static_content_bucket" {
-  bucket        = "${var.environment}-static-content-bucket"
+  bucket        = "${var.environment}-product2-static-content-bucket"
   acl           = "public-read"
   force_destroy = true
   website {
@@ -20,7 +20,7 @@ resource "aws_s3_bucket" "static_content_bucket" {
 
 resource "kubernetes_config_map" "s3_bucket_names" {
   metadata {
-    name      = "s3-bucket-names"
+    name      = "product2-s3-bucket-names"
     namespace = "default"
   }
 
